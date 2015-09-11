@@ -63,6 +63,9 @@ node default {
     fail('Please enable full disk encryption and try again')
   }
 
+  # Checkout any Funding Circle repos declared in hiera
+  include funding_circle
+
   # node versions
   nodejs::version { 'v0.6': }
   nodejs::version { 'v0.8': }
@@ -84,7 +87,7 @@ node default {
     ]:
   }
 
-  file { "${boxen::config::srcdir}/our-boxen":
+  file { "${boxen::config::srcdir}/boxen":
     ensure => link,
     target => $boxen::config::repodir
   }
